@@ -15,6 +15,7 @@ public class Building {
         }
         this.elevator = new Elevator(Direction.UP, floors.get(0), amountFloors);
     }
+
     public void start(int steps){
         for(int i = 1; i <= steps; i++){
             elevator.openDoor();
@@ -34,8 +35,7 @@ public class Building {
     }
 
     private void addPassengerInQueue(List<Passenger> peopleGotOut){
-        peopleGotOut.stream()
-                .forEach(passenger -> {
+        peopleGotOut.forEach(passenger -> {
                     passenger.setCurrentFloor(elevator.getCurrentFloor().getNumber());
                     elevator.getCurrentFloor().getQueue().add(passenger);
                     passenger.generateTargetFloor();
@@ -47,10 +47,12 @@ public class Building {
         StringBuilder stringBuilder = new StringBuilder();
         for (Floor floor: floors){
             if(elevator.getCurrentFloor().getNumber() != floor.getNumber())
-                stringBuilder.append(floor.getNumber() + " floor: waiting[" + floor+ "]\n");
+                stringBuilder.append(floor.getNumber()).append(" floor: waiting[").append(floor).append("]\n");
             else
-                stringBuilder.append(">"+floor.getNumber() + " floor: waiting[" + floor+ "]\ninfo: Elevator:{" +elevator+"} "+
-                        peopleGotOut+" people got out of the elevator. "+peopleEntered+" people entered the elevator.\n");
+                stringBuilder.append(">").append(floor.getNumber()).append(" floor: waiting[").
+                        append(floor).append("]\ninfo: Elevator:{").append(elevator).append("} ").
+                        append(peopleGotOut).append(" people got out of the elevator. ").
+                        append(peopleEntered).append(" people entered the elevator.\n");
         }
         System.out.print(stringBuilder);
     }

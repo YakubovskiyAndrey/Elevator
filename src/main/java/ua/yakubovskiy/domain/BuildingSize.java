@@ -8,6 +8,8 @@ public enum BuildingSize {
     private final int max;
     private final int amountFloors;
 
+    private final Random random = new Random();
+
     BuildingSize(int min, int max) {
         this.min = min;
         this.max = max;
@@ -15,7 +17,6 @@ public enum BuildingSize {
     }
 
     private int generateAmountFloors(){
-        Random random = new Random();
         return random.nextInt((getMax() - getMin()) + 1) + getMin();
     }
 

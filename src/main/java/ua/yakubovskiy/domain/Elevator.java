@@ -1,14 +1,12 @@
 package ua.yakubovskiy.domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Elevator {
     private static final int CAPACITY = 5;
     private Direction direction;
-    private LinkedList<Passenger> passengers = new LinkedList<>();
+    private List<Passenger> passengers = new ArrayList<>();
     private Floor currentFloor;
     private int maxFloor;
     private List<Passenger> peopleGotOut = new ArrayList<>();
@@ -19,27 +17,35 @@ public class Elevator {
         this.currentFloor = currentFloor;
         this.maxFloor = maxFloor;
     }
+
     public List<Passenger> getPeopleGotOut() {
         return peopleGotOut;
     }
+
     public void setCurrentFloor(Floor currentFloor) {
         this.currentFloor = currentFloor;
     }
+
     public int getPeopleEntered() {
         return peopleEntered;
     }
+
     public Floor getCurrentFloor() {
         return currentFloor;
     }
+
     public boolean elevatorIsFull(){
         return passengers.size() == CAPACITY;
     }
+
     public boolean elevatorIsEmpty(){
         return passengers.isEmpty();
     }
+
     public Direction getDirection() {
         return direction;
     }
+
     private Direction getDirectionFromPeople() {
         if(currentFloor.getNumber() == 1) return Direction.UP;
         else if(getCurrentFloor().getNumber() == maxFloor) return Direction.DOWN;
@@ -49,6 +55,7 @@ public class Elevator {
             return currentFloor.getQueue().size() - peoplesWantUp < peoplesWantUp ? Direction.UP : Direction.DOWN;
         }
     }
+
     public void openDoor(){
         if(!elevatorIsEmpty()){
             peopleGotOut = removePassengers();
@@ -58,10 +65,12 @@ public class Elevator {
         }
         peopleEntered = addPassengersToElevator();
     }
+
     private void setDirection(){
         if(currentFloor.getNumber() == 1) direction = Direction.UP;
         else if(currentFloor.getNumber() == maxFloor) direction = Direction.DOWN;
     }
+
     private int addPassengersToElevator(){
         setDirection();
         List<Passenger> passengersToRemoveFromQueue = new ArrayList<>();
@@ -85,15 +94,14 @@ public class Elevator {
 
     private List<Passenger> removePassengers(){
         List<Passenger> removedPassengers = new ArrayList<>();
-        Iterator<Passenger> it = passengers.iterator();
-
-        while (it.hasNext()) {
-            Passenger passenger = it.next();
-            if (passenger.getTargetFloor() == currentFloor.getNumber()) {
+             passengers.removeIf(passenger -> {
+            if(passenger.getTargetFloor() == currentFloor.getNumber()){
                 removedPassengers.add(passenger);
-                it.remove();
+                return true;
+            }else {
+                return false;
             }
-        }
+        });
         return removedPassengers;
     }
 
@@ -101,7 +109,7 @@ public class Elevator {
     public String toString() {
         StringBuilder res= new StringBuilder();
         for (Passenger passenger : passengers) {
-            res.append(passenger + "; ");
+            res.append(passenger).append("; ");
         }
         if(res.length()>0) res.deleteCharAt(res.length()-1);
         return res.toString();

@@ -1,13 +1,13 @@
 package ua.yakubovskiy.domain;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Floor {
     private static final int MAX_NUMBER_PASSENGERS = 10;
     private int number;
-    private LinkedList<Passenger> queue = new LinkedList<>();
+    private List<Passenger> queue = new ArrayList<>();
 
     public Floor(int number) {
         Random random = new Random();
@@ -20,6 +20,7 @@ public class Floor {
     public int getNumber() {
         return number;
     }
+
     public void removePassengerFromQueue(List<Passenger> passengersToRemove){
         queue.removeIf(passengersToRemove::contains);
     }

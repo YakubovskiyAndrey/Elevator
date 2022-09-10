@@ -4,13 +4,12 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Passenger {
-
     private int id;
     private int currentFloor;
     private int targetFloor;
     private Direction direction;
-
     private static int counter;
+    private final Random random = new Random();
 
     public Passenger(int currentFloor) {
         id = ++counter;
@@ -19,7 +18,6 @@ public class Passenger {
     }
 
     public void generateTargetFloor() {
-        Random random = new Random();
         int floorNum;
         do {
             floorNum = 1 + random.nextInt(BuildingSize.FLOORS.getAmountFloors());
@@ -31,9 +29,11 @@ public class Passenger {
     public void setCurrentFloor(int currentFloor) {
         this.currentFloor = currentFloor;
     }
+
     public int getTargetFloor() {
         return targetFloor;
     }
+
     public Direction getDirection() {
         return direction;
     }

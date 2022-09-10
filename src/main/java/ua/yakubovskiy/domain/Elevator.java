@@ -8,7 +8,7 @@ public class Elevator {
     private Direction direction;
     private List<Passenger> passengers = new ArrayList<>();
     private Floor currentFloor;
-    private int maxFloor;
+    private final int maxFloor;
     private List<Passenger> peopleGotOut = new ArrayList<>();
     private int peopleEntered;
 
@@ -40,6 +40,10 @@ public class Elevator {
 
     public boolean elevatorIsEmpty(){
         return passengers.isEmpty();
+    }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
     }
 
     public Direction getDirection() {

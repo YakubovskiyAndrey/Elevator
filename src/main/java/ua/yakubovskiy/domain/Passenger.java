@@ -34,6 +34,14 @@ public class Passenger {
         return targetFloor;
     }
 
+    public void setTargetFloor(int targetFloor) {
+        this.targetFloor = targetFloor;
+    }
+
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+
     public Direction getDirection() {
         return direction;
     }
@@ -58,4 +66,5 @@ public class Passenger {
     public String toString() {
         return "id=p" + id + " tf=" + targetFloor + "(" + direction.toString() + ")";
     }
+
 }

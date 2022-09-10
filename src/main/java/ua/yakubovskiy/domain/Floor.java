@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Floor {
     private static final int MAX_NUMBER_PASSENGERS = 10;
-    private int number;
+    private final int number;
     private List<Passenger> queue = new ArrayList<>();
 
     public Floor(int number) {
@@ -17,6 +17,11 @@ public class Floor {
             queue.add(new Passenger(number));
         }
     }
+
+    public void setQueue(List<Passenger> queue) {
+        this.queue = queue;
+    }
+
     public int getNumber() {
         return number;
     }

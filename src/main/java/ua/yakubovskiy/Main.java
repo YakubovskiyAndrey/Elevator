@@ -7,6 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Building building = new Building();
         System.out.println("START");
-        building.start(100);
+        building.start(10);
     }
 }

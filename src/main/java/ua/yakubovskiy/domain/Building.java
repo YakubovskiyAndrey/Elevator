@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
-
     private final Elevator elevator;
     private final List<Floor> floors = new ArrayList<>();
 
@@ -14,6 +13,10 @@ public class Building {
             floors.add(new Floor(i));
         }
         this.elevator = new Elevator(Direction.UP, floors.get(0), amountFloors);
+    }
+
+    public List<Floor> getFloors() {
+        return floors;
     }
 
     public void start(int steps){
